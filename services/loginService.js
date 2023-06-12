@@ -17,31 +17,22 @@ async function getlogin(page = 1) {
     };
   }
 
-async function postlogin(loginData) {
-    const cekemail = await db.query(
-    `SELECT * users WHERE email='${loginData.email}'`
+  async function postlogin(loginData) {
+    const ceklogin = await db.query(
+    `SELECT * users WHERE email='${loginData.email}' AND password='${loginData.password}'` 
     )
 
-    if (cekemail.length > 0) {
-
-        const result = await db.query(
-        `INSERT INTO users
-          (username, email, password) 
-          VALUES 
-          ('${registerData.username}', '${registerData.email}', '${registerData.password}')`
-      );
+    if (ceklogin.length > 0) {
+        message = "Berhasil Login";
     } else {
-        message = "email sudah terdaftar";
+        message = "Email atau Password salah!";
     }
 
   let message = "Error";
 
-  if (result.affectedRows) {
-    message = "Selamat, register berhasil!";
-  }
-
   return { message };
 }
+
 
 module.exports = {
     getlogin,

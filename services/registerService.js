@@ -18,12 +18,19 @@ async function getregister(page = 1) {
   }
 
 async function postregister(registerData) {
-  const result = await db.query(
-    `INSERT INTO users
-      (username, email, password) 
-      VALUES 
-      ('${registerData.username}', '${registerData.email}', '${registerData.password}')`
-  );
+    const cekemail = await db.query ( 
+        `SELECT * users WHERE email='${registerdata.email}'`
+    )
+    if (cekemail.length != 1) {
+        const result = await db.query(
+        `INSERT INTO users
+          (username, email, password) 
+          VALUES 
+          ('${registerData.username}', '${registerData.email}', '${registerData.password}')`
+      );
+    } else { 
+        message = "Gunakan email yang lain";
+    }
 
   let message = "Error";
 
