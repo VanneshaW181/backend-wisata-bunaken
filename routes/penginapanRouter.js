@@ -5,7 +5,7 @@ const penginapanService = require("../services/penginapanService");
 /* GET */
 router.get("/", async function (req, res, next) {
   try {
-    res.json(await penginapanService.getMultiple(req.query.page));
+    res.json(await penginapanService.getPenginapan(req.query.page));
   } catch (err) {
     console.error(`Error saat memuat penginapan `, err.message);
     next(err);
@@ -15,7 +15,7 @@ router.get("/", async function (req, res, next) {
 /* POST */
 router.post("/", async function (req, res, next) {
   try {
-    res.json(await penginapanService.create(req.body));
+    res.json(await penginapanService.postPenginapan(req.body));
   } catch (err) {
     console.error(`Error saat membuat penginapan`, err.message);
     next(err);
