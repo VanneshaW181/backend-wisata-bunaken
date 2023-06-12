@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const loginService = require("../services/loginService");
 /* GET */
-router.getlogin("/", async function (req, res, next) {
+router.get("/", async function (req, res, next) {
     try {
       res.json(await loginService.getlogin(req.query.page));
     } catch (err) {
@@ -11,7 +11,7 @@ router.getlogin("/", async function (req, res, next) {
     }
   });
 
-router.postlogin("/", async function (req, res, next) {
+router.post("/", async function (req, res, next) {
     try {
       res.json(await loginService.postlogin(req.body));
     } catch (err) {

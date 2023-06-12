@@ -44,6 +44,6 @@ async function postlogin(loginData) {
 }
 
 module.exports = {
-    getregister,
-    postregister,
+    getlogin,
+    postlogin,
 };

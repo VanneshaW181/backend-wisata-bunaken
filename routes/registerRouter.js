@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const registerService = require("../services/registerService");
 /* GET */
-router.getregister("/", async function (req, res, next) {
+router.get("/", async function (req, res, next) {
     try {
       res.json(await registerService.getregister(req.query.page));
     } catch (err) {
@@ -11,7 +11,7 @@ router.getregister("/", async function (req, res, next) {
     }
   });
 
-router.postregister("/", async function (req, res, next) {
+router.post("/", async function (req, res, next) {
     try {
       res.json(await registerService.postregister(req.body));
     } catch (err) {
