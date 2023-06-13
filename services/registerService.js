@@ -18,26 +18,29 @@ async function getregister(page = 1) {
   }
 
 async function postregister(registerData) {
-    const cekemail = await db.query ( 
-        `SELECT * users WHERE email='${registerdata.email}'`
-    )
-    if (cekemail.length != 1) {
+
+  var message='';
+  const cekemail = await db.query ( 
+        `SELECT * FROM users WHERE email='${registerData.email}'`
+    );
+  
+    if (cekemail.length === 0) {
         const result = await db.query(
         `INSERT INTO users
           (username, email, password) 
           VALUES 
-          ('${registerData.username}', '${registerData.email}', '${registerData.password}')`
-      );
+          ('${registerData.username}', '${registerData.email}', '${registerData.password}');`
+          );
+
+          if (result.affectedRows) {
+        message = "Selamat, register berhasil!";
+      }
     } else { 
         message = "Gunakan email yang lain";
     }
 
-  let message = "Error";
 
-  if (result.affectedRows) {
-    message = "Selamat, register berhasil!";
-  }
-
+console.log(message);
   return { message };
 }
 

@@ -17,16 +17,25 @@ async function getlogin(page = 1) {
     };
   }
 
-  async function postlogin(loginData) {
-    const ceklogin = await db.query(
-    `SELECT * users WHERE email='${loginData.email}' AND password='${loginData.password}'` 
-    )
-
-    if (ceklogin.length > 0) {
-        message = "Berhasil Login";
-    } else {
-        message = "Email atau Password salah!";
+  async function postlogin(loginData, res, next) {
+    
+      const [ceklogin] = await db.query(
+        "SELECT * FROM users WHERE email=? AND password=?",
+        [loginData.body.email, loginData.body.password]
+        
+      )
+  
+      if (ceklogin.length === 0) {
+       
+          message = "Email atau Password salah!"
+     
+      } else {
+       
+           message = "Berhasil Login"
+    
     }
+
+  
 
   let message = "Error";
 
